@@ -1,7 +1,9 @@
 FROM ruby:2.5
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /usr/src/app/
-COPY Gemfile /usr/src/app/
+COPY Gemfile Gemfile.lock /usr/src/app/
 RUN bundle install
-ADD http_server.rb /usr/src/app/
+COPY . /usr/src/app/
+RUN bundle exec rake assets:precompile
 EXPOSE 80
-CMD ["ruby", "/usr/src/app/http_server.rb"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "80"]
