@@ -17,5 +17,4 @@ spec:
       containers:
       - name: ruby
         image: pradeepkumara01/ruby:latest
-        ports:
-        - containerPort: 8080
+      
