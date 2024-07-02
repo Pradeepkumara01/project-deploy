@@ -1,9 +1,16 @@
 FROM ruby:2.7
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-WORKDIR /usr/src/app/
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock /usr/src/app/
+
+# Install dependencies
 RUN bundle install
+
+# Copy the rest of the application code
 COPY . /usr/src/app/
-RUN bundle exec rake assets:precompile
-EXPOSE 80
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "80"]
+
+# Specify the command to run on container start
+CMD ["ruby", "http_server.rb"]
