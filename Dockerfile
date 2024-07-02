@@ -4,7 +4,7 @@ FROM ruby:2.7
 WORKDIR /usr/src/app
 
 # Copy Gemfile and Gemfile.lock
-COPY Gemfile Gemfile.lock /usr/src/app/
+COPY Gemfile /usr/src/app/
 
 # Install dependencies
 RUN bundle install
